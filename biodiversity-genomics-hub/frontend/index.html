@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Biodiversity Genomics Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">◈</span>
+    <div>
+      <h1>Biodiversity Genomics Hub</h1>
+      <p class="tagline">Conservación basada en datos genéticos y geográficos abiertos</p>
+    </div>
+  </div>
+  <form id="species-form" class="search-form">
+    <input type="text" id="species-input" placeholder="Nombre científico, ej. Panthera onca" autocomplete="off" required />
+    <button type="submit">Analizar especie</button>
+  </form>
+</header>
+
+<main class="layout">
+
+  <section class="panel panel-map">
+    <div class="panel-head">
+      <h2>Distribución geográfica</h2>
+      <span id="occurrence-count" class="pill">—</span>
+    </div>
+    <div id="map"></div>
+  </section>
+
+  <section class="panel panel-status">
+    <div class="panel-head">
+      <h2>Estado de conservación</h2>
+    </div>
+    <div id="conservation-status" class="empty-state">Buscá una especie para ver su estado IUCN.</div>
+  </section>
+
+  <section class="panel panel-diversity">
+    <div class="panel-head">
+      <h2>Diversidad genética</h2>
+      <span class="marker-label" id="marker-label"></span>
+    </div>
+    <div id="diversity-metrics" class="empty-state">Los datos genéticos aparecen acá tras analizar una especie.</div>
+  </section>
+
+  <section class="panel panel-barcode">
+    <div class="panel-head">
+      <h2>Identificador por código de barras de ADN</h2>
+    </div>
+    <p class="panel-hint">Pegá una secuencia (FASTA o bases crudas, gen COI recomendado) para identificar la especie contra BOLD Systems.</p>
+    <form id="barcode-form">
+      <textarea id="barcode-input" placeholder=">muestra_1&#10;ATGCGTACGTTAGC..." rows="5" required></textarea>
+      <button type="submit">Identificar secuencia</button>
+    </form>
+    <div id="barcode-result"></div>
+  </section>
+
+  <section class="panel panel-registry">
+    <div class="panel-head">
+      <h2>Especies consultadas</h2>
+    </div>
+    <table id="registry-table">
+      <thead>
+        <tr><th>Especie</th><th>IUCN</th><th>Ocurrencias</th><th>π diversidad</th><th>Secuencias</th><th>Actualizado</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>Fuentes: GBIF · NCBI/GenBank · BOLD Systems · IUCN Red List. Métricas genéticas de carácter exploratorio.</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/api.js"></script>
+<script src="js/map.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
